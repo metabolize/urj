@@ -1,0 +1,41 @@
+{
+  "name": "urj",
+  "description": "Static web publishing using S3",
+  "version": "1.0.0",
+  "license": "BSD-2-Clause",
+  "main": null,
+  "bin": {
+    "urj": "./src/cli.js"
+  },
+  "scripts": {
+    "preinstall": "python -c 'import sys; sys.version_info[:2] == (2, 7) or sys.exit(-1)' || { echo >&2 This requires Python 2.7 but it is not installed. Please obtain Python 2.7. Aborting.; exit 1; }",
+    "install": "pip install baiji",
+    "jscs": "jscs --config node_modules/bodylabs-javascript-style/jscs/jscsrc-shared src --extract '*.js'",
+    "eslint": "eslint --config node_modules/bodylabs-javascript-style/eslint/eslintrc-shared.yml 'src/*.js'",
+    "lint": "npm run jscs && npm run eslint",
+    "unittest": "mocha 'src/**/*.spec.js'",
+    "test": "npm run lint && npm run unittest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bodylabs/urj.git"
+  },
+  "dependencies": {
+    "async": "~1.5.0",
+    "ncp": "^2.0.0",
+    "rho-cc-node-style-callback": "~1.0.1",
+    "rho-cc-s3-bucket-name": "~1.0.0",
+    "rho-contracts": "git+https://github.com/bodylabs/rho-contracts.js.git#1.1.0",
+    "temp": "^0.8.3",
+    "underscore": "~1.8.0"
+  },
+  "devDependencies": {
+    "bodylabs-javascript-style": "^4.0.0",
+    "commander": "~2.9.0",
+    "eslint": "^2.0.0",
+    "jscs": "^2.1.1",
+    "mocha": "~2.0.1",
+    "should": "~4.3.0",
+    "sinon": "~1.12.2"
+  }
+}
