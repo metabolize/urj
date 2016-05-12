@@ -1,7 +1,7 @@
 {
   "name": "urj",
   "description": "Static web publishing using S3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "BSD-2-Clause",
   "main": "./index.js",
   "bin": {
