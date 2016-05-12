@@ -32,16 +32,32 @@ var execWithInheritedStdio = function (command, callback) {
 var Publisher = function (options) {
     options = options || {};
     this.compress = options.compress === undefined ? true : options.compress;
+    this.noClobber = !! options.noClobber;
 };
 
 Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
     var fns = [];
+
+    if (this.noClobber) {
+        fns.push(function (callback) {
+            var command = 's3 ls ' + dstPath;
+
+            childProcess.exec(command, {}, function (err, stdout) {
+                if (stdout.indexOf(dstPath) != -1) {
+                    callback(new Error('The path "' + dstPath + '" already exists.'));
+                } else {
+                    callback();
+                }
+            });
+        });
+    }
 
     if (this.compress) {
         fns.push(_(compress).partial(srcPath));
     } else {
         fns.push(function (callback) { callback(srcPath); });
     }
+
 
     fns.push(function (tmpPath, callback) {
         var command = [

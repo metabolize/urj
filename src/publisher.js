@@ -5,6 +5,7 @@ var cc = _(require('./common-contracts')).clone();
 
 cc.publisherOptions = c.toContract({
     compress: c.optional(c.bool),
+    noClobber: c.optional(c.bool),
 }).rename('publisherOptions');
 
 // Publish some files to S3.

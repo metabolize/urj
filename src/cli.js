@@ -6,8 +6,9 @@ var Publisher = require('../src/publisher'),
 program
     .version('1.0')
     .arguments('<source> <target>')
+    .option('-n, --no-clobber', 'Do not overwrite any existing release')
     .action(function (source, target) {
-        var publisher = new Publisher();
+        var publisher = new Publisher({ noClobber: program.noClobber });
         publisher.publish(source, target, function (err) {
             if (err) {
                 throw err;
