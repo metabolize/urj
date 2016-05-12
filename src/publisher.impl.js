@@ -32,7 +32,7 @@ var execWithInheritedStdio = function (command, callback) {
 var Publisher = function (options) {
     options = options || {};
     this.compress = options.compress === undefined ? true : options.compress;
-    this.noClobber = !! options.noClobber;
+    this.noClobber = Boolean(options.noClobber);
 };
 
 Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
