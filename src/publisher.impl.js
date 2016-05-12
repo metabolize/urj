@@ -40,6 +40,8 @@ Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
 
     if (this.noClobber) {
         fns.push(function (callback) {
+            // List all keys that contain dstPath. If any are found, then dstPath exists
+            // and we don't want to publish.
             var command = 's3 ls ' + dstPath;
 
             childProcess.exec(command, {}, function (err, stdout) {
