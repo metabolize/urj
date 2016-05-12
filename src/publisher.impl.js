@@ -43,7 +43,9 @@ Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
             var command = 's3 ls ' + dstPath;
 
             childProcess.exec(command, {}, function (err, stdout) {
-                if (stdout.indexOf(dstPath) != -1) {
+                if (err) {
+                    callback(err);
+                } else if (stdout.indexOf(dstPath) !== -1) {
                     callback(new Error('The path "' + dstPath + '" already exists.'));
                 } else {
                     callback();
