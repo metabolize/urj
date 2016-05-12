@@ -15,6 +15,7 @@ Features
 - Sets `public-read`
 - Supports OS X and Linux
 - Requires Python 2.7 and [baiji][]
+- Can be used via a CLI or as a NodeJS library
 
 [baiji]: https://github.com/bodylabs/baiji
 
