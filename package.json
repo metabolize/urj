@@ -3,7 +3,7 @@
   "description": "Static web publishing using S3",
   "version": "1.0.0",
   "license": "BSD-2-Clause",
-  "main": null,
+  "main": "./index.js",
   "bin": {
     "urj": "./src/cli.js"
   },
