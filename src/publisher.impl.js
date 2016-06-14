@@ -36,6 +36,8 @@ var Publisher = function (options) {
 };
 
 Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
+    var publisher = this;
+
     var fns = [];
 
     if (this.noClobber) {
@@ -59,7 +61,7 @@ Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
     if (this.compress) {
         fns.push(_(compress).partial(srcPath));
     } else {
-        fns.push(function (callback) { callback(srcPath); });
+        fns.push(function (callback) { callback(null, srcPath); });
     }
 
 
@@ -67,13 +69,15 @@ Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
         var command = [
             's3 sync',
             '--guess-content-type',
-            '--encoding gzip',
             '--no-encrypt',
             '--policy public-read',
             '--progress',
-            tmpPath,
-            dstPath,
-        ].join(' ');
+        ]
+            .concat(publisher.compress ? ['--encoding gzip'] : [])
+            .concat([
+                tmpPath,
+                dstPath,
+            ]).join(' ');
 
         execWithInheritedStdio(command, callback);
     });
