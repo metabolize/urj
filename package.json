@@ -9,9 +9,7 @@
   "scripts": {
     "preinstall": "python -c 'import sys; sys.version_info[:2] == (2, 7) or sys.exit(-1)' || { echo >&2 This requires Python 2.7 but it is not installed. Please obtain Python 2.7. Aborting.; exit 1; }",
     "install": "pip install baiji",
-    "jscs": "jscs --config node_modules/bodylabs-javascript-style/jscs/jscsrc-shared src --extract '*.js'",
-    "eslint": "eslint --config node_modules/bodylabs-javascript-style/eslint/eslintrc-shared.yml 'src/*.js'",
-    "lint": "npm run jscs && npm run eslint",
+    "lint": "eslint '**/*.js'",
     "unittest": "mocha 'src/**/*.spec.js'",
     "test": "npm run lint && npm run unittest"
   },
@@ -30,11 +28,10 @@
     "underscore": "~1.8.0"
   },
   "devDependencies": {
-    "bodylabs-javascript-style": "^4.0.0",
-    "eslint": "^2.0.0",
-    "jscs": "^2.1.1",
-    "mocha": "~2.0.1",
-    "should": "~4.3.0",
+    "eslint": "^2.13.0",
+    "eslint-plugin-bodylabs": "^7.1.0",
+    "mocha": "~2.4.5",
+    "should": "~8.3.1",
     "sinon": "~1.12.2"
   }
 }
