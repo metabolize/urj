@@ -1,4 +1,4 @@
-var c = require('rho-contracts'),
+var c = require('rho-contracts-fork'),
     s3BucketName = require('rho-cc-s3-bucket-name'),
     url = require('url'),
     _ = require('underscore');

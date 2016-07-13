@@ -1,4 +1,4 @@
-var c = require('rho-contracts'),
+var c = require('rho-contracts-fork'),
     _ = require('underscore');
 
 var cc = _(require('./common-contracts')).clone();

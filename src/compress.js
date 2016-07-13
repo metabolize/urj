@@ -1,4 +1,4 @@
-var c = require('rho-contracts'),
+var c = require('rho-contracts-fork'),
     cc = require('./common-contracts');
 
 // Recursively compress a directory into a temporary folder, using gzip.
