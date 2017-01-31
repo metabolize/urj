@@ -5,6 +5,25 @@ Static web publishing using S3. Like [surge][], but without the syrup.
 
 [surge]: http://surge.sh/
 
+Usage
+--------
+Usage: `urj [options] <source> <target>`
+
+```
+args:
+
+   source: LocalPath
+   target: S3Uri
+ 
+Options:
+
+   -h, --help        output usage information
+   -V, --version     output the version number
+   -n, --no-clobber  Do not overwrite any existing release
+```
+
+Example: `urj mydirectory s3://mys3bucket`
+
 
 Features
 --------
