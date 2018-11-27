@@ -1,14 +1,16 @@
-var childProcess = require('child_process'),
+'use strict'
+
+const childProcess = require('child_process'),
   async = require('async'),
   compress = require('./compress'),
   _ = require('underscore')
 
-var execWithInheritedStdio = function(command, callback) {
-  var child = childProcess.spawn(command, { shell: true, stdio: 'inherit' })
+const execWithInheritedStdio = function(command, callback) {
+  const child = childProcess.spawn(command, { shell: true, stdio: 'inherit' })
 
   // Guard against invoking the callback more than once.
   // https://nodejs.org/api/child_process.html#child_process_event_error
-  var done = false
+  let done = false
 
   child.on('error', function(err) {
     if (!done) {
@@ -29,28 +31,28 @@ var execWithInheritedStdio = function(command, callback) {
   })
 }
 
-var Publisher = function(options) {
+const Publisher = function(options) {
   options = options || {}
   this.compress = options.compress === undefined ? true : options.compress
   this.noClobber = Boolean(options.noClobber)
 }
 
 Publisher.prototype.publish = function(srcPath, dstPath, doneCallback) {
-  var publisher = this
+  const publisher = this
 
-  var fns = []
+  const fns = []
 
   if (this.noClobber) {
     fns.push(function(callback) {
       // List all keys that contain dstPath. If any are found, then dstPath exists
       // and we don't want to publish.
-      var command = 's3 ls ' + dstPath
+      const command = `s3 ls ${dstPath}`
 
       childProcess.exec(command, {}, function(err, stdout) {
         if (err) {
           callback(err)
         } else if (stdout.indexOf(dstPath) !== -1) {
-          callback(new Error('The path "' + dstPath + '" already exists.'))
+          callback(new Error(`The path "${dstPath}" already exists.`))
         } else {
           callback()
         }
@@ -67,7 +69,7 @@ Publisher.prototype.publish = function(srcPath, dstPath, doneCallback) {
   }
 
   fns.push(function(tmpPath, callback) {
-    var command = [
+    const command = [
       's3 sync',
       '--guess-content-type',
       '--no-encrypt',

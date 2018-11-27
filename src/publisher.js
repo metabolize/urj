@@ -1,7 +1,9 @@
-var c = require('rho-contracts-fork'),
+'use strict'
+
+const c = require('rho-contracts-fork'),
   _ = require('underscore')
 
-var cc = _(require('./common-contracts')).clone()
+const cc = _(require('./common-contracts')).clone()
 
 cc.publisherOptions = c
   .toContract({

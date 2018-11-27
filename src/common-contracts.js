@@ -1,9 +1,11 @@
-var c = require('rho-contracts-fork'),
+'use strict'
+
+const c = require('rho-contracts-fork'),
   s3BucketName = require('rho-cc-s3-bucket-name'),
   url = require('url'),
   _ = require('underscore')
 
-var cc = (module.exports = {})
+const cc = (module.exports = {})
 
 cc.callback = require('rho-cc-node-style-callback').withDefaultError(c.error)
 
@@ -13,10 +15,10 @@ cc.s3Uri = c
       return false
     }
 
-    var parsed = url.parse(value)
+    const parsed = url.parse(value)
 
-    var disallowedKeys = ['auth', 'port', 'search', 'query', 'hash']
-    var isPresent = function(key) {
+    const disallowedKeys = ['auth', 'port', 'search', 'query', 'hash']
+    const isPresent = function(key) {
       return parsed[key] !== null
     }
     if (_(disallowedKeys).any(isPresent)) {

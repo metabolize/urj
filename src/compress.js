@@ -1,8 +1,10 @@
-var c = require('rho-contracts-fork'),
+'use strict'
+
+const c = require('rho-contracts-fork'),
   cc = require('./common-contracts')
 
 // Recursively compress a directory into a temporary folder, using gzip.
-var compress = c
+const compress = c
   .fun(
     { srcPath: c.string },
     {

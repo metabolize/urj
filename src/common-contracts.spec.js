@@ -1,19 +1,21 @@
-var c = require('rho-contracts-fork'),
+'use strict'
+
+const c = require('rho-contracts-fork'),
   cc = require('./common-contracts'),
   _ = require('underscore')
 
-var should = require('should')
+const should = require('should')
 
 // For convenience and conciseness.
-var good = should.doesNotThrow
-var bad = function(block) {
+const good = should.doesNotThrow
+const bad = function(block) {
   should.throws(block, c.ContractError)
 }
 
 describe('s3Uri', function() {
-  var goodUris = ['s3://foo/bar/baz', 's3://foo/bar', 's3://foo']
+  const goodUris = ['s3://foo/bar/baz', 's3://foo/bar', 's3://foo']
 
-  var badUris = [
+  const badUris = [
     'https://foo/bar/baz',
     's3://fiz:buzz@foo/bar/baz',
     's3://foo/bar/baz?bazinga',

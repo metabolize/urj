@@ -1,20 +1,22 @@
-var temp = require('temp'),
+'use strict'
+
+const temp = require('temp'),
   zlib = require('zlib'),
   async = require('async'),
   ncp = require('ncp').ncp,
   _ = require('underscore')
 
-var streamGzip = function(read, write) {
-  var gzip = zlib.createGzip({
+const streamGzip = function(read, write) {
+  const gzip = zlib.createGzip({
     level: zlib.Z_BEST_COMPRESSION,
   })
   read.pipe(gzip).pipe(write)
 }
 
-var compress = function(srcPath, doneCallback) {
-  var makeTempDir = _(temp.mkdir).partial('compressed')
+const compress = function(srcPath, doneCallback) {
+  const makeTempDir = _(temp.mkdir).partial('compressed')
 
-  var copyAndCompress = function(tempDirPath, callback) {
+  const copyAndCompress = function(tempDirPath, callback) {
     ncp(
       srcPath,
       tempDirPath,
