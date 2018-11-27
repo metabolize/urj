@@ -9,14 +9,13 @@
   "scripts": {
     "preinstall": "python -c 'import sys; sys.version_info[:2] == (2, 7) or sys.exit(-1)' || { echo >&2 This requires Python 2.7 but it is not installed. Please obtain Python 2.7. Aborting.; exit 1; }",
     "install": "pip install baiji",
+    "test:js": "mocha 'src/**/*.spec.js'",
     "lint": "eslint '**/*.js'",
-    "unittest": "mocha 'src/**/*.spec.js'",
-    "test": "npm run lint && npm run unittest"
+    "prettier": "prettier --write \"**/*.js\"",
+    "prettier-check": "prettier-check \"**/*.js\"",
+    "test": "npm run lint && npm run test:js && npm run prettier-check"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:bodylabs/urj.git"
-  },
+  "repository": "paulmelnikow/urj",
   "dependencies": {
     "async": "~1.5.0",
     "commander": "~2.9.0",
@@ -28,10 +27,18 @@
     "underscore": "~1.8.0"
   },
   "devDependencies": {
-    "eslint": "^2.13.0",
-    "eslint-plugin-bodylabs": "^7.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "mocha": "~2.4.5",
     "should": "~8.3.1",
-    "sinon": "~1.12.2"
+    "sinon": "~1.12.2",
+    "prettier": "^1.15.2",
+    "prettier-check": "^2.0.0"
   }
 }
