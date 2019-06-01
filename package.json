@@ -17,7 +17,7 @@
   },
   "repository": "paulmelnikow/urj",
   "dependencies": {
-    "async": "~1.5.0",
+    "async": "~3.0.1",
     "commander": "~2.9.0",
     "ncp": "^2.0.0",
     "rho-cc-node-style-callback": "^2.0.0",
