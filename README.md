@@ -1,5 +1,14 @@
 # urj
 
+[![version](https://img.shields.io/npm/v/urj?style=flat-square)][npm]
+[![license](https://img.shields.io/npm/l/urj?style=flat-square)][npm]
+[![build](https://img.shields.io/circleci/project/github/metabolize/urj?style=flat-square)][build]
+[![code style](https://img.shields.io/badge/code_style-prettier-ff69b4?style=flat-square)][prettier]
+
+[npm]: https://npmjs.com/urj
+[build]: https://circleci.com/gh/metabolize/urj/tree/master
+[prettier]: https://prettier.io/
+
 Static web publishing using S3. Like [surge][], but without the syrup.
 
 [surge]: http://surge.sh/
@@ -42,6 +51,14 @@ Example: `urj mydirectory s3://mys3bucket`
 3. `baiji` will be installed for you, via `pip`.
 4. Set your AWS credentials in `~/.aws/credentials`, if they're not already
    there.
+
+## Acknowledgements
+
+This project was packaged by [Paul Melnikow][] while at [Body Labs][]. Thanks
+to Body Labs for the repository transfer.
+
+[paul melnikow]: https://github.com/paulmelnikow
+[body labs]: https://github.com/bodylabs
 
 ## License
 
