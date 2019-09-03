@@ -1,12 +1,11 @@
-urj
-===
+# urj
 
 Static web publishing using S3. Like [surge][], but without the syrup.
 
 [surge]: http://surge.sh/
 
-Usage
---------
+## Usage
+
 Usage: `urj [options] <source> <target>`
 
 ```
@@ -14,7 +13,7 @@ args:
 
    source: LocalPath
    target: S3Uri
- 
+
 Options:
 
    -h, --help        output usage information
@@ -24,9 +23,7 @@ Options:
 
 Example: `urj mydirectory s3://mys3bucket`
 
-
-Features
---------
+## Features
 
 - Installs and configures easily
 - Uses your own S3 account
@@ -38,9 +35,7 @@ Features
 
 [baiji]: https://github.com/bodylabs/baiji
 
-
-Installation
-------------
+## Installation
 
 1. Install Python 2.7
 2. `npm install urj`
@@ -48,23 +43,6 @@ Installation
 4. Set your AWS credentials in `~/.aws/credentials`, if they're not already
    there.
 
-
-Contribute
-----------
-
-- Issue Tracker: github.com/bodylabs/urj/issues
-- Source Code: github.com/bodylabs/urj
-
-Pull requests welcome!
-
-
-Support
--------
-
-If you are having issues, please let us know.
-
-
-License
--------
+## License
 
 The project is licensed under the two-clause BSD license.

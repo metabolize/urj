@@ -1,8 +1,9 @@
-var Publisher = require('./src/publisher'),
-    compress = require('./src/compress');
+'use strict'
+
+const Publisher = require('./src/publisher'),
+  compress = require('./src/compress')
 
 module.exports = {
-    Publisher: Publisher,
-    compress: compress,
-};
-
+  Publisher,
+  compress,
+}

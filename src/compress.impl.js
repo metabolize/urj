@@ -1,41 +1,43 @@
-var temp = require('temp'),
-    zlib = require('zlib'),
-    async = require('async'),
-    ncp = require('ncp').ncp,
-    _ = require('underscore');
+'use strict'
 
-var streamGzip = function (read, write) {
-    var gzip = zlib.createGzip({
-        level: zlib.Z_BEST_COMPRESSION,
-    });
-    read.pipe(gzip).pipe(write);
-};
+const temp = require('temp'),
+  zlib = require('zlib'),
+  async = require('async'),
+  ncp = require('ncp').ncp,
+  _ = require('underscore')
 
-var compress = function (srcPath, doneCallback) {
-    var makeTempDir = _(temp.mkdir).partial('compressed');
+const streamGzip = function(read, write) {
+  const gzip = zlib.createGzip({
+    level: zlib.Z_BEST_COMPRESSION,
+  })
+  read.pipe(gzip).pipe(write)
+}
 
-    var copyAndCompress = function (tempDirPath, callback) {
-        ncp(
-            srcPath,
-            tempDirPath,
-            {
-                clobber: false,
-                dereference: true,
-                stopOnErr: true,
-                transform: streamGzip,
-            },
-            function (err) {
-                if (err) {
-                    // With stopOnErr: true, we should get only one error.
-                    callback(err[0]);
-                } else {
-                    callback(null, tempDirPath);
-                }
-            }
-        );
-    };
+const compress = function(srcPath, doneCallback) {
+  const makeTempDir = _(temp.mkdir).partial('compressed')
 
-    async.waterfall([makeTempDir, copyAndCompress], doneCallback);
-};
+  const copyAndCompress = function(tempDirPath, callback) {
+    ncp(
+      srcPath,
+      tempDirPath,
+      {
+        clobber: false,
+        dereference: true,
+        stopOnErr: true,
+        transform: streamGzip,
+      },
+      function(err) {
+        if (err) {
+          // With stopOnErr: true, we should get only one error.
+          callback(err[0])
+        } else {
+          callback(null, tempDirPath)
+        }
+      }
+    )
+  }
 
-module.exports = compress;
+  async.waterfall([makeTempDir, copyAndCompress], doneCallback)
+}
+
+module.exports = compress
