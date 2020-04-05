@@ -5,21 +5,21 @@ const childProcess = require('child_process'),
   compress = require('./compress'),
   _ = require('underscore')
 
-const execWithInheritedStdio = function(command, callback) {
+const execWithInheritedStdio = function (command, callback) {
   const child = childProcess.spawn(command, { shell: true, stdio: 'inherit' })
 
   // Guard against invoking the callback more than once.
   // https://nodejs.org/api/child_process.html#child_process_event_error
   let done = false
 
-  child.on('error', function(err) {
+  child.on('error', function (err) {
     if (!done) {
       callback(err)
       done = true
     }
   })
 
-  child.on('exit', function(code, signal) {
+  child.on('exit', function (code, signal) {
     if (!done) {
       if (code === 0) {
         callback(null)
@@ -31,24 +31,24 @@ const execWithInheritedStdio = function(command, callback) {
   })
 }
 
-const Publisher = function(options) {
+const Publisher = function (options) {
   options = options || {}
   this.compress = options.compress === undefined ? true : options.compress
   this.noClobber = Boolean(options.noClobber)
 }
 
-Publisher.prototype.publish = function(srcPath, dstPath, doneCallback) {
+Publisher.prototype.publish = function (srcPath, dstPath, doneCallback) {
   const publisher = this
 
   const fns = []
 
   if (this.noClobber) {
-    fns.push(function(callback) {
+    fns.push(function (callback) {
       // List all keys that contain dstPath. If any are found, then dstPath exists
       // and we don't want to publish.
       const command = `s3 ls ${dstPath}`
 
-      childProcess.exec(command, {}, function(err, stdout) {
+      childProcess.exec(command, {}, function (err, stdout) {
         if (err) {
           callback(err)
         } else if (stdout.indexOf(dstPath) !== -1) {
@@ -63,12 +63,12 @@ Publisher.prototype.publish = function(srcPath, dstPath, doneCallback) {
   if (this.compress) {
     fns.push(_(compress).partial(srcPath))
   } else {
-    fns.push(function(callback) {
+    fns.push(function (callback) {
       callback(null, srcPath)
     })
   }
 
-  fns.push(function(tmpPath, callback) {
+  fns.push(function (tmpPath, callback) {
     const command = [
       's3 sync',
       '--guess-content-type',
@@ -83,7 +83,7 @@ Publisher.prototype.publish = function(srcPath, dstPath, doneCallback) {
     execWithInheritedStdio(command, callback)
   })
 
-  async.waterfall(fns, function(err) {
+  async.waterfall(fns, function (err) {
     // Discard other arguments.
     doneCallback(err)
   })

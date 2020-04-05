@@ -9,9 +9,9 @@ program
   .version('1.1')
   .arguments('<source> <target>')
   .option('-n, --no-clobber', 'Do not overwrite any existing release')
-  .action(function(source, target) {
+  .action(function (source, target) {
     const publisher = new Publisher({ noClobber: program.noClobber })
-    publisher.publish(source, target, function(err) {
+    publisher.publish(source, target, function (err) {
       if (err) {
         throw err
       }
