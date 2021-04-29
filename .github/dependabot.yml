@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: eslint
+    versions:
+    - 7.16.0
+    - 7.19.0
+  - dependency-name: commander
+    versions:
+    - 6.2.1
+    - 7.0.0
+  - dependency-name: eslint-plugin-prettier
+    versions:
+    - 3.3.0
+  - dependency-name: mocha
+    versions:
+    - 8.2.1
